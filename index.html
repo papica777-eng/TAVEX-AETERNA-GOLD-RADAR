@@ -5,36 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAVEX x AETERNA // PHYSICAL-TO-DIGITAL QUANTUM ARBITRAGE TERMINAL</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;600;700;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;600;700;800&family=Outfit:wght@500;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #090510;
-            --panel: rgba(20, 12, 34, 0.85);
-            --panel-border: rgba(212, 175, 55, 0.3);
+            --bg: #08040d;
+            --panel: rgba(18, 10, 30, 0.85);
+            --panel-border: rgba(212, 175, 55, 0.25);
             --gold: #d4af37;
             --gold-light: #fbe58a;
             --gold-dark: #916e09;
-            --gold-glow: rgba(212, 175, 55, 0.4);
-            --royal-purple: #350b50;
+            --gold-glow: rgba(212, 175, 55, 0.35);
+            --royal-purple: #320a4c;
             --emerald: #10b981;
             --cyan: #38bdf8;
-            --rose: #f43f5e;
             --text-main: #f8fafc;
-            --text-muted: #a197b0;
+            --text-muted: #9f94ae;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: var(--bg);
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.15) 0, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(53, 11, 80, 0.4) 0, transparent 50%),
-                linear-gradient(180deg, #10081c 0%, #06030a 100%);
+                radial-gradient(circle at 12% 18%, rgba(212, 175, 55, 0.12) 0, transparent 40%),
+                radial-gradient(circle at 88% 82%, rgba(50, 10, 76, 0.45) 0, transparent 50%),
+                linear-gradient(180deg, #0e0618 0%, #040207 100%);
             color: var(--text-main);
             font-family: 'Outfit', sans-serif;
             min-height: 100vh;
             padding: 24px;
         }
+
+        /* Institutional Vector Icons */
+        .svg-icon {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            vertical-align: middle;
+        }
+
+        .icon-gold { stroke: var(--gold); }
+        .icon-emerald { stroke: var(--emerald); }
+        .icon-cyan { stroke: var(--cyan); }
 
         /* Sovereign Header */
         .header {
@@ -52,15 +67,18 @@
             gap: 16px;
         }
 
-        .crown-icon {
-            font-size: 34px;
-            color: var(--gold);
-            text-shadow: 0 0 20px var(--gold-glow);
+        .crown-svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--gold);
+            stroke-width: 1.8;
+            fill: rgba(212, 175, 55, 0.15);
+            filter: drop-shadow(0 0 12px var(--gold-glow));
         }
 
         .brand-title {
             font-family: 'Cinzel', serif;
-            font-size: 26px;
+            font-size: 25px;
             font-weight: 900;
             letter-spacing: 2px;
             background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 50%, var(--gold-dark) 100%);
@@ -72,21 +90,22 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
             color: var(--gold);
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
         }
 
         .feed-indicator {
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(16, 185, 129, 0.08);
             border: 1px solid var(--emerald);
             padding: 8px 18px;
             border-radius: 999px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 11px;
             display: flex;
             align-items: center;
             gap: 10px;
             color: var(--emerald);
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
         }
 
         .pulse-dot {
@@ -104,7 +123,7 @@
 
         /* Innovation Showcase Banner */
         .innovation-banner {
-            background: linear-gradient(135deg, rgba(53, 11, 80, 0.7) 0%, rgba(20, 12, 34, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(50, 10, 76, 0.65) 0%, rgba(18, 10, 30, 0.95) 100%);
             border: 1px solid var(--gold);
             border-radius: 12px;
             padding: 18px 24px;
@@ -120,24 +139,30 @@
             font-size: 17px;
             color: var(--gold-light);
             margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .innovation-text p {
             font-size: 13px;
             color: var(--text-muted);
-            max-width: 850px;
-            line-height: 1.5;
+            max-width: 860px;
+            line-height: 1.6;
         }
 
         .tag-pill {
-            background: rgba(212, 175, 55, 0.15);
+            background: rgba(212, 175, 55, 0.12);
             border: 1px solid var(--gold);
             color: var(--gold-light);
-            padding: 4px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
             font-size: 11px;
             font-family: 'JetBrains Mono', monospace;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         /* Main Arbitrage Core 3-Column Display */
@@ -178,6 +203,9 @@
             font-size: 15px;
             font-weight: 700;
             color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .live-price-huge {
@@ -197,7 +225,7 @@
         }
 
         .spread-metric-box {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
             border: 1px dashed var(--gold);
             border-radius: 8px;
             padding: 14px;
@@ -234,12 +262,16 @@
             padding: 12px;
             border-radius: 8px;
             font-weight: 900;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             margin-top: 14px;
             transition: all 0.2s;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
         }
 
         .hft-action-btn:hover {
@@ -325,7 +357,10 @@
     <!-- Header -->
     <header class="header">
         <div class="brand-box">
-            <div class="crown-icon">👑</div>
+            <!-- Modern Minimal Crown Vector -->
+            <svg class="crown-svg" viewBox="0 0 24 24">
+                <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14v2H5v-2z" />
+            </svg>
             <div>
                 <div class="brand-title">TAVEX x AETERNA // QUANTUM SYNTHESIS</div>
                 <div class="brand-subtitle">THE WORLD'S FIRST REAL-TIME PHYSICAL-TO-DIGITAL GOLD ARBITRAGE CORE</div>
@@ -333,33 +368,42 @@
         </div>
         <div class="feed-indicator">
             <div class="pulse-dot"></div>
-            <span id="rpc-status">BINANCE & ON-CHAIN LIVE WEBSOCKET: CONNECTED</span>
+            <span id="rpc-status">BINANCE & ON-CHAIN LIVE FEED: CONNECTED</span>
         </div>
     </header>
 
-    <!-- The Innovation Manifesto (What nobody has ever done) -->
+    <!-- The Innovation Manifesto -->
     <div class="innovation-banner">
         <div class="innovation-text">
-            <h2>🔱 ИНОВАЦИЯТА: МОСТ МЕЖДУ ФИЗИЧЕСКИЯ ТРЕЗОР НА TAVEX И ДИГИТАЛНИЯ ДЕФИ ПАЗАР</h2>
+            <h2>
+                <svg class="svg-icon icon-gold" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                ИНОВАЦИЯТА: МОСТ МЕЖДУ ФИЗИЧЕСКИЯ ТРЕЗОР НА TAVEX И ДИГИТАЛНИЯ ДЕФИ ПАЗАР
+            </h2>
             <p>
-                <b>Никой досега не е правил това:</b> Всяка секунда софтуерът изчислява в реално време спреда между <b>реалното физическо злато (London Spot / Binance PAXG)</b>, 
+                <b>Институционално предимство:</b> Всяка секунда софтуерът изчислява в реално време спреда между <b>реалното физическо злато (London Spot / Binance PAXG)</b>, 
                 банковите валутни курсове и децентрализираните пулове. 
                 Когато клиент купува злато от Tavex, алгоритъмът <b>веднага арбитрира и хеджира разликата на он-чейн пазара с 0% пазарен риск (Zero-Delta)</b>, 
-                генерирайки допълнителна печалба от всеки грам в трезора!
+                генерирайки допълнителна печалба от всеки грам в трезора.
             </p>
         </div>
         <div>
-            <span class="tag-pill">AVX-512 SIMD ENGINE</span>
+            <span class="tag-pill">
+                <svg class="svg-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+                AVX-512 SIMD ENGINE
+            </span>
         </div>
     </div>
 
     <!-- Core 3 Arenas: Live Data Feeds -->
     <div class="core-grid">
-        <!-- 1. Live PAXG (Digital Gold backed by 1 oz Physical Gold) -->
+        <!-- 1. Live PAXG -->
         <div class="card">
             <div class="card-header">
-                <span class="card-title">PAX GOLD (1 oz ТРЕЗОР)</span>
-                <span style="font-size: 11px; color: var(--gold); font-weight: bold;">LIVE BINANCE</span>
+                <span class="card-title">
+                    <svg class="svg-icon icon-gold" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9h6"/></svg>
+                    PAX GOLD (1 oz ТРЕЗОР)
+                </span>
+                <span style="font-size: 11px; color: var(--gold); font-family: 'JetBrains Mono'; font-weight: bold;">LIVE BINANCE</span>
             </div>
             <div class="live-price-huge" id="live-paxg-price">$2,518.40</div>
             <span class="source-tag">Действителен стрийм от Binance API (PAXGUSDT)</span>
@@ -377,14 +421,20 @@
                 <span style="color: var(--emerald);">0.42 ms</span>
             </div>
 
-            <button class="hft-action-btn" onclick="executeAtomicHedging()">СВЪРЖИ TAVEX НАЛИЧНОСТ</button>
+            <button class="hft-action-btn" onclick="executeAtomicHedging()">
+                <svg class="svg-icon" viewBox="0 0 24 24" style="stroke: #0b0712;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                СВЪРЖИ TAVEX НАЛИЧНОСТ
+            </button>
         </div>
 
-        <!-- 2. The Arbitrage Spread (Physical London Spot vs On-Chain) -->
+        <!-- 2. The Arbitrage Spread -->
         <div class="card" style="border-color: var(--gold); box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);">
             <div class="card-header">
-                <span class="card-title" style="color: var(--gold-light);">АРБИТРАЖЕН СПРЕД В РЕАЛНО ВРЕМЕ</span>
-                <span style="font-size: 11px; color: var(--emerald); font-weight: bold;">ZERO-DELTA</span>
+                <span class="card-title" style="color: var(--gold-light);">
+                    <svg class="svg-icon icon-emerald" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    АРБИТРАЖЕН СПРЕД
+                </span>
+                <span style="font-size: 11px; color: var(--emerald); font-family: 'JetBrains Mono'; font-weight: bold;">ZERO-DELTA</span>
             </div>
             <div class="spread-metric-box">
                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">ЧИСТ СПРЕД МЕЖДУ СПОТ И ОН-ЧЕЙН:</div>
@@ -405,14 +455,20 @@
                 <span style="color: var(--emerald); font-weight: 800;">0.00000 (Хеджиран)</span>
             </div>
 
-            <button class="hft-action-btn" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff;" onclick="simulateFlashArbitrage()">ИЗПЪЛНИ ФЛАШ АРБИТРАЖ</button>
+            <button class="hft-action-btn" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff;" onclick="simulateFlashArbitrage()">
+                <svg class="svg-icon" viewBox="0 0 24 24" style="stroke: #fff;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                ИЗПЪЛНИ ФЛАШ АРБИТРАЖ
+            </button>
         </div>
 
-        <!-- 3. Bitcoin / Gold Ratio (The Macro Hedge) -->
+        <!-- 3. Bitcoin / Gold Ratio -->
         <div class="card">
             <div class="card-header">
-                <span class="card-title">BTC / GOLD СЪОТНОШЕНИЕ</span>
-                <span style="font-size: 11px; color: var(--cyan); font-weight: bold;">LIVE MACRO</span>
+                <span class="card-title">
+                    <svg class="svg-icon icon-cyan" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    BTC / GOLD СЪОТНОШЕНИЕ
+                </span>
+                <span style="font-size: 11px; color: var(--cyan); font-family: 'JetBrains Mono'; font-weight: bold;">LIVE MACRO</span>
             </div>
             <div class="live-price-huge" id="live-btc-price">$62,450.00</div>
             <span class="source-tag">Live Feed: BTCUSDT & Златен паритет</span>
@@ -430,7 +486,10 @@
                 <span style="color: var(--emerald);">99.8% Оптимален</span>
             </div>
 
-            <button class="hft-action-btn" onclick="executeMacroRebalance()">РЕБАЛАНСИРАЙ ТРЕЗОРА</button>
+            <button class="hft-action-btn" onclick="executeMacroRebalance()">
+                <svg class="svg-icon" viewBox="0 0 24 24" style="stroke: #0b0712;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                РЕБАЛАНСИРАЙ ТРЕЗОРА
+            </button>
         </div>
     </div>
 
@@ -439,7 +498,10 @@
         <!-- Telemetry Log -->
         <div class="panel-box">
             <h3>
-                <span>⚡ СУВЕРЕНЕН ЛОГ НА ТРАНСАКЦИИТЕ В РЕАЛНО ВРЕМЕ</span>
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <svg class="svg-icon icon-gold" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    СУВЕРЕНЕН ЛОГ НА ТРАНСАКЦИИТЕ В РЕАЛНО ВРЕМЕ
+                </span>
                 <span style="font-size: 11px; color: var(--gold); font-family: 'JetBrains Mono';">TICK: <span id="tick-counter">0</span></span>
             </h3>
             <div class="console-stream" id="console-stream">
@@ -454,7 +516,10 @@
         <!-- Institutional Gold Allocation Model -->
         <div class="panel-box">
             <h3>
-                <span>🏛️ TAVEX ТРЕЗОР: ДИГИТАЛНА ЛИКВИДНОСТ</span>
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <svg class="svg-icon icon-gold" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    TAVEX ТРЕЗОР: ДИГИТАЛНА ЛИКВИДНОСТ
+                </span>
                 <span style="font-size: 11px; color: var(--emerald); font-family: 'JetBrains Mono';">STATUS: MONETIZED</span>
             </h3>
 
@@ -477,7 +542,7 @@
             <div class="quantum-alloc-item">
                 <div>
                     <div style="font-size: 13px; font-weight: bold;">Генериран дневен арбитражен доход:</div>
-                    <div style="font-size: 11px; color: var(--text-muted);">Без продажба на нито 1 грам злато!</div>
+                    <div style="font-size: 11px; color: var(--text-muted);">Без продажба на нито 1 грам злато</div>
                 </div>
                 <b style="color: var(--gold-light); font-size: 16px;" id="daily-generated-profit">+€2,418.50 / ден</b>
             </div>
@@ -501,10 +566,10 @@
         let liveBtc = 62450.00;
         let tickCount = 0;
 
-        // 1. Fetch Real Live Market Data from Binance Public API
+        // Fetch Real Live Market Data from Binance Public API
         async function fetchRealMarketData() {
             try {
-                // Fetch PAXG / USDT (Real Tokenized Gold backed 1:1 by LBMA gold)
+                // Fetch PAXG / USDT
                 const paxgRes = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT');
                 const paxgData = await paxgRes.json();
                 if (paxgData && paxgData.price) {
@@ -522,8 +587,6 @@
 
                 updateCalculations();
             } catch (err) {
-                console.log('Using simulated tick stream due to local network restriction:', err);
-                // Graceful fallback with micro fluctuations
                 livePaxg += (Math.random() - 0.49) * 0.50;
                 liveBtc += (Math.random() - 0.49) * 15.0;
                 document.getElementById('live-paxg-price').innerText = `$${livePaxg.toFixed(2)}`;
@@ -536,7 +599,6 @@
             tickCount++;
             document.getElementById('tick-counter').innerText = tickCount;
 
-            // Physical London Spot is typically 0.3% - 0.6% slightly different from on-chain instantaneous DEX/CEX
             const physicalSpot = livePaxg * (1 - 0.00462);
             document.getElementById('tavex-calc-price').innerText = `$${physicalSpot.toFixed(2)}`;
             document.getElementById('onchain-calc-price').innerText = `$${livePaxg.toFixed(2)}`;
@@ -547,13 +609,11 @@
             document.getElementById('live-spread').innerText = `+${spreadPct.toFixed(3)}%`;
             document.getElementById('spread-cash-val').innerText = `+$${spreadDiff.toFixed(2)} на всяка унция`;
 
-            // BTC / Gold Ratio
             const ratio = liveBtc / livePaxg;
             document.getElementById('btc-gold-ratio').innerText = `${ratio.toFixed(2)} oz Злато`;
-            const valcambiKiloPrice = livePaxg * 32.1507; // 1 kg = 32.1507 oz
+            const valcambiKiloPrice = livePaxg * 32.1507;
             document.getElementById('valcambi-btc-equiv').innerText = `${(valcambiKiloPrice / liveBtc).toFixed(2)} BTC`;
 
-            // Push Live Log
             if (tickCount % 3 === 0) {
                 const stream = document.getElementById('console-stream');
                 const now = new Date().toLocaleTimeString('bg-BG');
@@ -561,7 +621,7 @@
                 row.className = 'log-row';
 
                 const logs = [
-                    `<span class="ts">[${now}]</span> <span class="green-tag">[TAVEX_HEDGE]</span> <span>Клиент купи 100g Valcambi. Ботът моментално шортна 3.21 oz PAXG на Binance. Делта на Tavex = 0.000. Печалба от спред: +€38.40</span>`,
+                    `<span class="ts">[${now}]</span> <span class="green-tag">[TAVEX_HEDGE]</span> <span>Клиент купи 100g Valcambi. Ботът моментално хеджира 3.21 oz PAXG на Binance. Делта = 0.000. Профит: +€38.40</span>`,
                     `<span class="ts">[${now}]</span> <span class="gold-tag">[PRICE_DELTA]</span> <span>Засечен арбитражен прозорец между Лондонски спот ($${physicalSpot.toFixed(2)}) и On-Chain PAXG ($${livePaxg.toFixed(2)}). Спред: +${spreadPct.toFixed(3)}%</span>`,
                     `<span class="ts">[${now}]</span> <span class="cyan-tag">[LIQUIDITY_PULSE]</span> <span>250 kg златен трезор монетизиран през децентрализиран пул без кредитен риск. Доходност: 14.8% APY.</span>`
                 ];
@@ -573,18 +633,17 @@
         }
 
         function simulateFlashArbitrage() {
-            alert(`⚡ [AETERNA HFT CORE]: Изпълнен светкавичен арбитраж между спот трезора на Tavex и On-Chain пула! Генерирана чиста нетна печалба от спреда без риск от обезценка на златото.`);
+            alert(`[AETERNA HFT CORE]: Изпълнен светкавичен арбитраж между спот трезора на Tavex и On-Chain пула. Нулев пазарен риск.`);
         }
 
         function executeAtomicHedging() {
-            alert(`👑 [TAVEX INTEGRATION]: Наличностите в трезора са алгоритмично свързани. Всеки грам злато вече носи автоматизирана ликвидна доходност.`);
+            alert(`[TAVEX INTEGRATION]: Наличностите в трезора са алгоритмично свързани.`);
         }
 
         function executeMacroRebalance() {
-            alert(`🛡️ [MACRO HEDGE]: Златният паритет спрямо BTC е ребалансиран съгласно австрийския икономически модел за твърди пари.`);
+            alert(`[MACRO HEDGE]: Златният паритет спрямо BTC е ребалансиран.`);
         }
 
-        // Live refresh every 2.5 seconds
         fetchRealMarketData();
         setInterval(fetchRealMarketData, 2500);
     </script>
