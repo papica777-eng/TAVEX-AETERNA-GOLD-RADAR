@@ -1191,10 +1191,18 @@
     </footer>
 
     <script>
+        // Persistent Storage Keys
+        const STORAGE_KEY_PNL = 'tavex_aeterna_realized_pnl';
+        const STORAGE_KEY_TRADES = 'tavex_aeterna_trades_count';
+        const STORAGE_KEY_BLOTTER = 'tavex_aeterna_blotter_history';
+        const STORAGE_KEY_SETTINGS = 'tavex_aeterna_user_settings';
+
         let tickCount = 0;
         let isAutoPilotActive = true;
-        let totalRealizedPnl = 1428.60;
-        let autoTradesCount = 18;
+        
+        // Restore persistent state or initialize with default baseline
+        let totalRealizedPnl = parseFloat(localStorage.getItem(STORAGE_KEY_PNL)) || 1428.60;
+        let autoTradesCount = parseInt(localStorage.getItem(STORAGE_KEY_TRADES), 10) || 18;
         let minSpreadThreshold = 0.15;
         let tradeSizeOz = 5;
         let lastAutoTradeTime = 0;
@@ -1211,16 +1219,39 @@
 
         const venueKeys = ['tavex', 'binance', 'kraken', 'gate', 'bitstamp', 'dex'];
 
-        // Initial Seed Blotter Rows for visual impact
-        const blotterHistory = [
-            { id: 'HFT-8894', time: '12:16:48', buy: 'TAVEX (LBMA)', buyP: 4417.80, sell: 'UNISWAP v3', sellP: 4438.20, size: 5, spread: 0.462, pnl: 92.40 },
-            { id: 'HFT-8893', time: '12:16:32', buy: 'BITSTAMP', buyP: 4426.10, sell: 'KRAKEN', sellP: 4433.50, size: 5, spread: 0.167, pnl: 33.40 },
-            { id: 'HFT-8892', time: '12:16:15', buy: 'GATE.IO', buyP: 4429.20, sell: 'UNISWAP v3', sellP: 4439.00, size: 5, spread: 0.221, pnl: 44.20 },
-            { id: 'HFT-8891', time: '12:15:58', buy: 'TAVEX (LBMA)', buyP: 4418.10, sell: 'BINANCE', sellP: 4431.50, size: 5, spread: 0.303, pnl: 60.60 }
-        ];
+        // Initial Seed Blotter Rows (Restored from localStorage if available)
+        let blotterHistory = [];
+        try {
+            const savedBlotter = localStorage.getItem(STORAGE_KEY_BLOTTER);
+            if (savedBlotter) {
+                blotterHistory = JSON.parse(savedBlotter);
+            }
+        } catch(e) {
+            blotterHistory = [];
+        }
+
+        if (!blotterHistory || blotterHistory.length === 0) {
+            blotterHistory = [
+                { id: 'HFT-8894', time: '12:16:48', buy: 'TAVEX (LBMA)', buyP: 4417.80, sell: 'UNISWAP v3', sellP: 4438.20, size: 5, spread: 0.462, pnl: 92.40 },
+                { id: 'HFT-8893', time: '12:16:32', buy: 'BITSTAMP', buyP: 4426.10, sell: 'KRAKEN', sellP: 4433.50, size: 5, spread: 0.167, pnl: 33.40 },
+                { id: 'HFT-8892', time: '12:16:15', buy: 'GATE.IO', buyP: 4429.20, sell: 'UNISWAP v3', sellP: 4439.00, size: 5, spread: 0.221, pnl: 44.20 },
+                { id: 'HFT-8891', time: '12:15:58', buy: 'TAVEX (LBMA)', buyP: 4418.10, sell: 'BINANCE', sellP: 4431.50, size: 5, spread: 0.303, pnl: 60.60 }
+            ];
+        }
+
+        function persistState() {
+            try {
+                localStorage.setItem(STORAGE_KEY_PNL, totalRealizedPnl.toFixed(2));
+                localStorage.setItem(STORAGE_KEY_TRADES, autoTradesCount.toString());
+                localStorage.setItem(STORAGE_KEY_BLOTTER, JSON.stringify(blotterHistory.slice(0, 20)));
+            } catch(e) {
+                console.warn('LocalStorage save failed:', e.message);
+            }
+        }
 
         function renderBlotter() {
             const tbody = document.getElementById('blotter-body');
+            if (!tbody) return;
             tbody.innerHTML = blotterHistory.map(b => `
                 <tr>
                     <td style="font-weight: bold; color: var(--cyan);">${b.id}</td>
@@ -1233,6 +1264,12 @@
                     <td><span class="status-tag status-filled">FILLED // 0-DELTA</span></td>
                 </tr>
             `).join('');
+
+            // Restore initial UI metrics from memory
+            const pnlEl = document.getElementById('kpi-realized-pnl');
+            const countEl = document.getElementById('kpi-trades-count');
+            if (pnlEl) pnlEl.innerText = `+$${totalRealizedPnl.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (countEl) countEl.innerText = autoTradesCount;
         }
 
         // Toggle Auto-Pilot
@@ -1394,6 +1431,7 @@
 
             if (blotterHistory.length > 8) blotterHistory.pop();
             renderBlotter();
+            persistState();
 
             // Stream log entry
             const stream = document.getElementById('console-stream');
